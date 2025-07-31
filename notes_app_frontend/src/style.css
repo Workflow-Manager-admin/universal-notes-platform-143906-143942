@@ -1,16 +1,186 @@
 :root {
+  --color-primary: #4285f4;
+  --color-secondary: #f1f3f4;
+  --color-accent: #fbbc04;
+  --color-bg: #fff;
+  --color-text: #213547;
+  --color-border: #d3dbe4;
+  --color-bg-dark: #202124;
+  --color-text-dark: #f4f8fb;
+  --sidebar-width: 200px;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Theme toggling (body[data-theme]) */
+body[data-theme="dark"] {
+  --color-bg: var(--color-bg-dark);
+  --color-text: var(--color-text-dark);
+  --color-border: #4f5667;
+}
+
+/* Modern minimal basics */
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background 0.2s, color 0.2s;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+a:hover {
+  color: var(--color-accent);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 1em;
+  outline: none;
+}
+
+button {
+  border-radius: 7px;
+  border: 1px solid var(--color-border);
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  padding: 0.5em 1em;
+  cursor: pointer;
+  transition: background .15s, border .15s;
+}
+button:active,
+button:focus {
+  border-color: var(--color-primary);
+}
+button.primary {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+button.accent {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+input, textarea, select {
+  border-radius: 6px;
+  border: 1.3px solid var(--color-border);
+  outline: none;
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: .6em;
+  margin-bottom: 10px;
+  min-width: 0;
+}
+
+input:focus, textarea:focus{
+  border-color: var(--color-primary);
+}
+
+.app-bar {
+  width: 100vw;
+  box-sizing: border-box;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.8em 2em 0.8em 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.25em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--color-secondary);
+  border-right: 1px solid var(--color-border);
+  height: 100vh;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0; top: 0;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar .nav-link {
+  padding: 1.2em 1.6em;
+  font-size: 1em;
+  color: var(--color-text);
+  border-left: 3px solid transparent;
+  transition: background .15s;
+}
+.sidebar .nav-link.active {
+  background: #e3eafd;
+  border-left: 3px solid var(--color-primary);
+  color: var(--color-primary);
+}
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 1em;
+}
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding: 2em 2.5em;
+  transition: margin 0.2s;
+  min-height: 90vh;
+}
+
+@media (max-width: 700px) {
+  :root { --sidebar-width: 64px; }
+  .sidebar { padding-top: 48px; }
+  .sidebar .nav-link { font-size: .93em; padding: 1em 0.7em;}
+  .main-content { padding: 1em 0.7em;}
+}
+
+@media (max-width: 450px) {
+  .main-content { margin-left: 0; }
+  .sidebar { position: static; width: 100vw; min-height: 40px; }
+}
+
+.dialog-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(44,54,74,0.15);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.dialog-box {
+  padding: 2em 2em 1em 2em;
+  background: var(--color-bg);
+  border-radius: 10px;
+  min-width: 310px;
+  max-width: 98vw;
+  box-shadow: 0px 2px 16px #19315528;
+  border: 1.2px solid var(--color-border);
+}
+
+hr {
+  border: none;
+  height: 1.5px;
+  background: var(--color-border);
+  margin: 1em 0;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e4eaf5;
+  border-radius: 6px;
 }
 
 a {
